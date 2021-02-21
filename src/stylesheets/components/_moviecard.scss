@@ -1,0 +1,26 @@
+.moviecard-wrapper {
+  flex: 1 0 33%;
+  max-width: 33%;
+  display: flex;
+  .moviecard {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    border: 1px solid black;
+    border-radius: $font-size-8;
+    padding: $font-size-8;
+    margin: $font-size-16;
+  }
+
+  @include mediaquery(medium) {
+    flex: 1 0 50%;
+    max-width: 100%;
+    display: flex;
+  }
+
+  @include mediaquery(small) {
+    flex: 1 0 100%;
+    max-width: 100%;
+    display: block;
+  }
+}

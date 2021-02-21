@@ -1,0 +1,35 @@
+@import './functions';
+
+@mixin font-face($font-name, $font-weight: $webfont-weight, $font-style: $webfont-style) {
+  font-family: quote($font-name);
+  font-weight: $font-weight;
+  font-style: $font-style;
+  src: font(quote($font-name) + '.woff2') format('woff2'), font(quote($font-name) + '.woff') format('woff');
+}
+
+@mixin gradient($angle, $list) {
+  background-image: -webkit-linear-gradient($angle, $list);
+  background-image: -moz-linear-gradient($angle, $list);
+  background-image: -o-linear-gradient($angle, $list);
+  background-image: linear-gradient($angle, $list);
+}
+
+@mixin mediaquery($breakpoint, $breakpointsdef: $breakpoints) {
+  @if map-has-key($breakpointsdef, $breakpoint) {
+    $breakpoint: map-get($breakpointsdef, $breakpoint);
+  }
+
+  @media screen and (max-width: #{$breakpoint}) {
+    @content;
+  }
+}
+
+@mixin mediaqueryMin($breakpoint, $breakpointsdef: $breakpoints) {
+  @if map-has-key($breakpointsdef, $breakpoint) {
+    $breakpoint: map-get($breakpointsdef, $breakpoint);
+  }
+
+  @media screen and (min-width: #{$breakpoint}) {
+    @content;
+  }
+}

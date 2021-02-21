@@ -1,0 +1,45 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass variables.
+// -----------------------------------------------------------------------------
+$webfont-weight: normal !default;
+$webfont-style: normal !default;
+
+$font-color-text: #565360;
+$font-color-label: #908e9b;
+$font-color-disabled: #e1dfe9;
+
+$font-size-4: 0.25rem; //4px
+$font-size-8: 0.5rem; //8px
+$font-size-12: 0.75rem; //12px
+$font-size-16: 1rem; //16px
+$font-size-20: 1.25rem; //20px
+$font-size-24: 1.5rem; //24px
+$font-size-32: 2rem; //32px
+$font-size-48: 3rem; //48px
+$font-size-64: 4rem; //64px
+$font-size-200: 12.5rem; //200px
+$font-size-384: 24rem; //384px
+
+/// Container's maximum width
+/// @type Length
+$max-width: 1180px !default;
+
+/// Breakpoints map
+/// @prop {String} keys - Keys are identifiers mapped to a given length
+/// @prop {Map} values - Values are actual breakpoints expressed in pixels
+$breakpoints: (
+  //375px
+  'small': 23.438rem,
+  //768px
+  'medium': 48rem,
+  //1024px
+  'large': 64rem,
+  //1440px
+  'extra': 90rem
+) !default;
+
+/// Relative or absolute URL where all assets are served from
+/// @type String
+/// @example scss - When using a CDN
+///   $base-url: 'http://cdn.example.com/assets/';
+$base-url: './assets/' !default;
