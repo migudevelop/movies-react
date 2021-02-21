@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-
+import React, { useContext } from 'react';
+import { CoreContext } from 'services/context/coreContext.js';
 import { AppBar, Toolbar, Button, IconButton, Typography, InputBase } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 
 function Header() {
+  const { login } = useContext(CoreContext);
   return (
     <header>
       <div className="header-root">
@@ -13,12 +14,15 @@ function Header() {
             {/* <IconButton edge="start" className="menu-button" color="inherit" aria-label="open drawer">
               <MenuIcon />
             </IconButton> */}
-            {/* <Typography className="title" variant="h6" noWrap>
-              Movies
-            </Typography> */}
-            <div className="login-button">
-              <Button color="inherit">Login</Button>
-            </div>
+            {login?.isLogged() ? (
+              <Typography className="title" variant="h6" noWrap>
+                {login?.getUser().name}
+              </Typography>
+            ) : (
+              <div className="login-button">
+                <Button color="inherit">Login</Button>
+              </div>
+            )}
             <div className="search">
               <div className="search-icon">
                 <SearchIcon />
