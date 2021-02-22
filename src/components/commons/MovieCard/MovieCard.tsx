@@ -1,9 +1,9 @@
 import React from 'react';
-import { MovieProps } from 'interfaces/moviecard';
+import { IEMovieProps } from 'interfaces/moviecard';
 import imagen from 'assets/images/black-widow.jpg';
 import Rating from '@material-ui/lab/Rating';
 
-function MovieCard({ imageURL = '', name = '', description = '', rating = 0 }: MovieProps) {
+function MovieCard({ imageURL = '', name = '', description = '', rating = 0 }: IEMovieProps) {
   return (
     <div className="moviecard-wrapper">
       <div className="moviecard">

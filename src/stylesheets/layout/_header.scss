@@ -1,9 +1,12 @@
 .header-root {
   flex-grow: 1;
 
-  .menu-button {
+  .user-icon {
+    flex-grow: 1;
     margin-right: $font-size-16;
+    justify-content: start;
   }
+
   .title,
   .login-button {
     flex-grow: 1;
@@ -40,8 +43,17 @@
     width: 100%;
   }
 
+  @include mediaqueryMin(large) {
+    .title {
+      display: block;
+    }
+
+    .user-icon {
+      flex-grow: inherit;
+    }
+  }
+
   @include mediaqueryMin(small) {
-    .title,
     .login-button {
       display: block;
     }

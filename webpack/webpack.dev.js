@@ -1,9 +1,9 @@
-const merge= require('webpack-merge');
+const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 const path = require('path');
 const openBrowser = require('react-dev-utils/openBrowser');
 
-const port = 9000;
+const port = 9002;
 
 module.exports = merge(common, {
   mode: 'development',
@@ -21,7 +21,7 @@ module.exports = merge(common, {
     proxy: [
       {
         context: ['/api'],
-        target: `http://localhost:9004`,
+        target: `http://localhost:9006`,
         secure: false,
         changeOrigin: true,
       },

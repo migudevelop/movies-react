@@ -1,4 +1,4 @@
-export interface MovieProps {
+export interface IEMovieProps {
   imageURL?: string;
   name: string;
   sortDescription?: string;

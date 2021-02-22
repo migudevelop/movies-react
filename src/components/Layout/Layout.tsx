@@ -6,12 +6,13 @@ import { Backdrop, CircularProgress } from '@material-ui/core';
 
 function Layout({ children }: Props) {
   const { loading } = useContext(BackdropContext);
+  const backdropRef = React.createRef();
   return (
     <>
       <Header />
       <div className="container">
         {loading && (
-          <Backdrop style={{ zIndex: 1 }} open={loading}>
+          <Backdrop ref={backdropRef} style={{ zIndex: 1 }} open={loading}>
             <CircularProgress color="primary" size={70} />
           </Backdrop>
         )}

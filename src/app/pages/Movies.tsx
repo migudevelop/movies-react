@@ -4,7 +4,7 @@ import Layout from 'components/Layout/Layout';
 import MovieCard from 'components/commons/MovieCard/MovieCard';
 import { BackdropContext } from 'services/context/backdropContext';
 
-import { MovieProps } from 'interfaces/moviecard';
+import { IEMovieProps } from 'interfaces/moviecard';
 
 function Movies() {
   const [movies, setMovies] = useState<[] | any>(null);
@@ -26,7 +26,7 @@ function Movies() {
     <Layout>
       <div className="movies-wrapper">
         {movies &&
-          movies.map(({ imageURL, name, sortDescription, rating }: MovieProps, index: number) => (
+          movies.map(({ imageURL, name, sortDescription, rating }: IEMovieProps, index: number) => (
             <MovieCard key={index} imageURL={imageURL} name={name} description={sortDescription} rating={rating} />
           ))}
       </div>

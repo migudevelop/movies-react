@@ -1,4 +1,35 @@
 import React, { createContext } from 'react';
-import LoginService from '../login_service/index.tsx';
 
-export const CoreContext = createContext({ login: LoginService().getInstance() });
+export const CORE_CONSTANTS = {
+  LOGIN: 'LOGIN',
+  LOGOUT: 'LOGOUT',
+};
+
+export const reducer = (state, action) => {
+  switch (action.type) {
+    case CORE_CONSTANTS.LOGIN: {
+      console.log(action);
+      return {
+        ...state,
+        user: action.value,
+        isLogged: true,
+      };
+    }
+    case CORE_CONSTANTS.LOGOUT: {
+      return {
+        ...state,
+        user: '',
+        isLogged: false,
+      };
+    }
+    default:
+      return state;
+  }
+};
+
+export const initialState = {
+  user: '',
+  isLogged: false,
+};
+
+export const CoreContext = createContext();

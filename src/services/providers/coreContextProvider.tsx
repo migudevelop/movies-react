@@ -1,9 +1,8 @@
-import React from 'react';
-import { CoreContext } from 'services/context/coreContext.js';
+import React, { useReducer } from 'react';
+import { CoreContext, reducer, initialState } from 'services/context/coreContext.js';
 import { Props } from 'interfaces/commons';
-import LoginService from 'services/login_service';
 
 export default function CoreContextProvider({ children }: Props) {
-  const login = LoginService().getInstance();
-  return <CoreContext.Provider value={{ login: login }}>{children}</CoreContext.Provider>;
+  const [state, dispatch] = useReducer(reducer, initialState);
+  return <CoreContext.Provider value={{ state, dispatch }}>{children}</CoreContext.Provider>;
 }
