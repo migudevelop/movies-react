@@ -1,5 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { CoreContext, CORE_CONSTANTS } from 'services/context/coreContext.js';
+import { BackdropContext } from 'services/context/backdropContext.js';
 import {
   AppBar,
   Toolbar,
@@ -9,15 +10,87 @@ import {
   DialogTitle,
   TextField,
   IconButton,
+  MenuItem,
+  Menu,
+  Hidden,
 } from '@material-ui/core';
 import { Search, AccountCircle } from '@material-ui/icons';
 import Dialog from 'components/commons/Dialog/Dialog';
+import { login } from 'services/axios_service/app';
+import { IELoginRequest } from 'interfaces/petitions';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+
+const FILM_LIST = ['Blackwidow', 'Jumanji', 'Onward', 'Avengers', 'Spiderman', 'Batman'];
 
 function Header() {
-  const { state, dispatch } = useContext(CoreContext);
+  const { state, dispatch, searchText } = useContext(CoreContext);
+  const { showLoader, hideLoader } = useContext(BackdropContext);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [sendData, setSendData] = useState<IELoginRequest>({ user: '', password: '' });
+  const [fieldErrors, setFieldsErrors] = useState<any>({});
+  const [openDialog, setOpenDialog] = useState<boolean>(false);
 
   const handleLogin = () => {
-    dispatch({ type: CORE_CONSTANTS.LOGIN, value: 'Prueba' });
+    if (handleValidation()) {
+      setOpenDialog(false);
+      showLoader();
+      login({ ...sendData })
+        .then(({ data }) => dispatch({ type: CORE_CONSTANTS.LOGIN, value: data.data.user }))
+        .catch((response) => {
+          console.log(response);
+        })
+        .finally(() => hideLoader());
+    }
+  };
+
+  const handleLogout = () => {
+    dispatch({ type: CORE_CONSTANTS.LOGOUT });
+    setAnchorEl(null);
+  };
+
+  const handleMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSendData({ ...sendData, [e.target.id]: e.target.value });
+  };
+
+  const handleValidation = () => {
+    let valid: boolean = true;
+    let errors: any = {};
+
+    if (!sendData['user']) {
+      valid = false;
+      errors['user'] = 'Cannot be empty';
+    }
+
+    if (typeof sendData['user'] !== 'undefined') {
+      if (!sendData['user'].match(/^[a-z]+$/)) {
+        valid = false;
+        errors['user'] = 'Only lowercase letters';
+      }
+    }
+
+    if (typeof sendData['password'] !== 'undefined') {
+      if (!sendData['password'].match(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}/)) {
+        valid = false;
+        errors['password'] =
+          'Must contain at least one number and one uppercase and lowercase letter, and at least 5 or more characters';
+      }
+    }
+
+    setFieldsErrors({ ...errors });
+
+    return valid;
+  };
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    searchText.setSearch(e.target.value);
   };
 
   return (
@@ -27,9 +100,15 @@ function Header() {
           <Toolbar className="container">
             {state.isLogged ? (
               <>
-                <IconButton edge="start" className="user-icon" color="inherit">
+                <IconButton edge="start" className="user-icon" color="inherit" onClick={handleMenu}>
                   <AccountCircle />
                 </IconButton>
+                <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
+                  <Hidden mdUp>
+                    <MenuItem>{state.user}</MenuItem>
+                  </Hidden>
+                  <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                </Menu>
                 <Typography className="title" variant="h6" noWrap>
                   {state.user}
                 </Typography>
@@ -38,6 +117,7 @@ function Header() {
               <div className="login-button">
                 <Dialog
                   textButton="Login"
+                  openDialog={openDialog}
                   showActionButtons={true}
                   btnCancelText="Cancel"
                   btnAcceptText="Login"
@@ -45,8 +125,31 @@ function Header() {
                 >
                   <DialogTitle id="form-dialog-title">Login</DialogTitle>
                   <DialogContent>
-                    <TextField autoFocus margin="dense" id="user" label="User" type="text" fullWidth />
-                    <TextField margin="dense" id="password" label="Password" type="password" fullWidth />
+                    <form autoComplete="off">
+                      <TextField
+                        autoFocus
+                        margin="dense"
+                        id="user"
+                        label="User"
+                        type="text"
+                        fullWidth
+                        required
+                        error={!!fieldErrors.user}
+                        helperText={fieldErrors.user || ''}
+                        onChange={onChange}
+                      />
+                      <TextField
+                        margin="dense"
+                        id="password"
+                        label="Password"
+                        type="password"
+                        fullWidth
+                        required
+                        error={!!fieldErrors.password}
+                        helperText={fieldErrors.password || ''}
+                        onChange={onChange}
+                      />
+                    </form>
                   </DialogContent>
                 </Dialog>
               </div>
@@ -55,13 +158,21 @@ function Header() {
               <div className="search-icon">
                 <Search />
               </div>
-              <InputBase
-                placeholder="Search…"
-                classes={{
-                  root: 'input-root',
-                  input: 'input-input',
-                }}
-                inputProps={{ 'aria-label': 'search' }}
+              <Autocomplete
+                freeSolo
+                options={FILM_LIST.map((option) => option)}
+                renderInput={(params) => (
+                  <InputBase
+                    ref={params.InputProps.ref}
+                    placeholder="Search…"
+                    classes={{
+                      root: 'input-root',
+                      input: 'input-input',
+                    }}
+                    onChange={handleSearch}
+                    inputProps={{ ...params.inputProps, 'aria-label': 'search' }}
+                  />
+                )}
               />
             </div>
           </Toolbar>

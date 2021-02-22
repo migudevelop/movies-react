@@ -1,8 +1,14 @@
 var express = require('express');
+var bodyParser = require('body-parser');
 var { routes } = require('./routes.js');
 const COLORS = require('./colors.js');
+const USER = {
+  user: 'user',
+  password: 'aA123',
+};
 
 var app = express();
+app.use(bodyParser.json());
 const port = 9006;
 
 const expressPost = (ruta, rutas) => {
@@ -16,7 +22,16 @@ const expressPost = (ruta, rutas) => {
   );
   app.post(ruta, function (req, res) {
     setTimeout(() => {
-      res.send(JSON.stringify(require(rutas[req.url])));
+      if (req.url == Object.keys(routes.LOGIN)[0] && Object.keys(req.body).length > 0) {
+        const { user, password } = req.body;
+        if (user == 'user' && password == 'aA123') {
+          res.send(JSON.stringify(require(rutas[req.url])));
+        } else {
+          res.status(401).json({ error: true, messageError: 'User or password incorrect.' });
+        }
+      } else {
+        res.send(JSON.stringify(require(rutas[req.url])));
+      }
     }, 1000);
   });
 };

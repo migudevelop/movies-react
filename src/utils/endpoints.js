@@ -1,1 +1,1 @@
-export const ENDPOINTS = { GET_MOVIES: '/api/getmovies' };
+export const ENDPOINTS = { LOGIN: '/api/login', GET_MOVIES: '/api/getmovies' };

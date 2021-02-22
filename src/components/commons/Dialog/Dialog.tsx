@@ -1,16 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { IEDialogProps } from 'interfaces/dialog';
 import { Dialog, DialogActions, Button } from '@material-ui/core';
 
 function LoginButtonDialog({
   textButton,
+  openDialog = false,
   showActionButtons,
   children,
   btnCancelText,
   btnAcceptText,
   onAcceptClick,
 }: IEDialogProps) {
-  const [open, setOpen] = React.useState(false);
+  const [currentOpen, setOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    setOpen(openDialog);
+  }, [openDialog]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -25,7 +30,7 @@ function LoginButtonDialog({
       <Button variant="text" color="inherit" onClick={handleClickOpen}>
         {textButton}
       </Button>
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+      <Dialog open={currentOpen} onClose={handleClose} aria-labelledby="form-dialog-title">
         {children}
         {showActionButtons && (
           <DialogActions>

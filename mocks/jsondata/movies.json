@@ -4,20 +4,53 @@
     "name": "Blackwidow",
     "sortDescription": "Is an upcoming American superhero film based on the Marvel Comics character of the same name.",
     "description": "Is an upcoming American superhero film based on the Marvel Comics character of the same name. Produced by Marvel Studios and distributed by Walt Disney Studios Motion Pictures, it is intended to be the 24th film in the Marvel Cinematic Universe (MCU). The film was directed by Cate Shortland and written by Eric Pearson from a story by Jac Schaeffer and Ned Benson, and stars Scarlett Johansson as Natasha Romanoff / Black Widow alongside Florence Pugh, David Harbour, O-T Fagbenle, William Hurt, Ray Winstone, and Rachel Weisz. Set after Captain America: Civil War (2016), the film sees Romanoff on the run and forced to confront her past.",
-    "rating": 5
+    "rating": 5,
+    "genre": "Action",
+    "type": "Superheros"
   },
   {
     "imageURL": "",
     "name": "Jumanji",
     "sortDescription": "The gang is back but the game has changed.",
     "description": "The gang is back but the game has changed. As they return to rescue one of their own, the players will have to brave parts unknown from arid deserts to snowy mountains, to escape the world's most dangerous game.",
-    "rating": 1
+    "rating": 1,
+    "genre": "Comedy",
+    "type": "childish"
   },
   {
     "imageURL": "",
     "name": "Onward",
     "sortDescription": "Is a 2020 American computer-animated urban fantasy-adventure film.",
     "description": "Is a 2020 American computer-animated urban fantasy-adventure film produced by Pixar Animation Studios and released by Walt Disney Pictures. ... Set in a suburban fantasy world, the film follows two elf brothers who set out on a quest to find an artifact that will temporarily bring back their dead father.",
-    "rating": 3
+    "rating": 3,
+    "genre": "Adventure",
+    "type": "cartoons"
+  },
+  {
+    "imageURL": "",
+    "name": "Avengers",
+    "sortDescription": "Is an upcoming American superhero film based on the Marvel Comics character of the same name.",
+    "description": "Is an upcoming American superhero film based on the Marvel Comics character of the same name. Produced by Marvel Studios and distributed by Walt Disney Studios Motion Pictures, it is intended to be the 24th film in the Marvel Cinematic Universe (MCU). The film was directed by Cate Shortland and written by Eric Pearson from a story by Jac Schaeffer and Ned Benson, and stars Scarlett Johansson as Natasha Romanoff / Black Widow alongside Florence Pugh, David Harbour, O-T Fagbenle, William Hurt, Ray Winstone, and Rachel Weisz. Set after Captain America: Civil War (2016), the film sees Romanoff on the run and forced to confront her past.",
+    "rating": 5,
+    "genre": "Action",
+    "type": "Superheros"
+  },
+  {
+    "imageURL": "",
+    "name": "Spiderman",
+    "sortDescription": "The gang is back but the game has changed.",
+    "description": "The gang is back but the game has changed. As they return to rescue one of their own, the players will have to brave parts unknown from arid deserts to snowy mountains, to escape the world's most dangerous game.",
+    "rating": 1,
+    "genre": "Adventure",
+    "type": "Superheros"
+  },
+  {
+    "imageURL": "",
+    "name": "Batman",
+    "sortDescription": "Is a 2020 American computer-animated urban fantasy-adventure film.",
+    "description": "Is a 2020 American computer-animated urban fantasy-adventure film produced by Pixar Animation Studios and released by Walt Disney Pictures. ... Set in a suburban fantasy world, the film follows two elf brothers who set out on a quest to find an artifact that will temporarily bring back their dead father.",
+    "rating": 3,
+    "genre": "Action",
+    "type": "Superheros"
   }
 ]
