@@ -6,7 +6,7 @@ import { BackdropContext } from 'services/context/backdropContext';
 import { CoreContext } from 'services/context/coreContext.js';
 import { FormControl, Select, InputLabel } from '@material-ui/core';
 
-import { IEMovieProps } from 'interfaces/moviecard';
+import { IEMovieProps, IEMovieFilters } from 'interfaces/movies.tsx';
 
 const TYPES = ['Superheros', 'childish', 'cartoons'];
 const GENRE = ['Action', 'Adventure', 'Comedy'];
@@ -15,6 +15,7 @@ function Movies() {
   const { showLoader, hideLoader } = useContext(BackdropContext);
   const { searchText } = useContext(CoreContext);
   const [movies, setMovies] = useState<[] | any>(null);
+  const [movieFilters, setMovieFilters] = useState<IEMovieFilters>({ genreFilter: '', typeFilter: '' });
 
   useEffect(() => {
     if (movies == null) {
@@ -28,15 +29,32 @@ function Movies() {
     }
   }, []);
 
+  const handleFilterChange = (event: React.ChangeEvent<any>) => {
+    setMovieFilters({ ...movieFilters, [event.target.id]: event.target.value });
+  };
+
   return (
     <Layout>
       <div className="selects-wrapper">
-        <FormControl>
+        <FormControl className="mr-5">
           <InputLabel htmlFor="grouped-native-select">Type</InputLabel>
-          <Select native defaultValue="" id="grouped-native-select">
+          <Select native defaultValue="" onChange={handleFilterChange} id="typeFilter">
             <option aria-label="None" value="" />
-            {TYPES.map((data) => (
-              <option value={data}>{data}</option>
+            {TYPES.map((data, index) => (
+              <option key={index} value={data}>
+                {data}
+              </option>
+            ))}
+          </Select>
+        </FormControl>
+        <FormControl className="mr-5">
+          <InputLabel htmlFor="grouped-native-select">Genre</InputLabel>
+          <Select native defaultValue="" onChange={handleFilterChange} id="genreFilter">
+            <option aria-label="None" value="" />
+            {GENRE.map((data, index) => (
+              <option key={index} value={data}>
+                {data}
+              </option>
             ))}
           </Select>
         </FormControl>
@@ -44,7 +62,12 @@ function Movies() {
       <div className="movies-wrapper">
         {movies &&
           movies
-            .filter(({ name }: IEMovieProps) => name.toLowerCase().includes(searchText.textSearch.toLowerCase()))
+            .filter(
+              ({ name, genre, type }: IEMovieProps) =>
+                name.toLowerCase().includes(searchText.textSearch.toLowerCase()) &&
+                genre?.toLowerCase().includes(movieFilters.genreFilter.toLowerCase()) &&
+                type?.toLowerCase().includes(movieFilters.typeFilter.toLowerCase())
+            )
             .map(({ imageURL, name, sortDescription, rating }: IEMovieProps, index: number) => (
               <MovieCard key={index} imageURL={imageURL} name={name} description={sortDescription} rating={rating} />
             ))}

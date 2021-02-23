@@ -7,3 +7,8 @@ export interface IEMovieProps {
   genre?: string;
   type?: string;
 }
+
+export interface IEMovieFilters {
+  genreFilter: string;
+  typeFilter: string;
+}

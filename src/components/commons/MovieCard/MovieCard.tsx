@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { CoreContext } from 'services/context/coreContext.js';
-import { IEMovieProps } from 'interfaces/moviecard';
+import { IEMovieProps } from 'interfaces/movies.tsx';
 import imagen from 'assets/images/black-widow.jpg';
 import Rating from '@material-ui/lab/Rating';
 
