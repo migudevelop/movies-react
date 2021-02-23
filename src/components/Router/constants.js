@@ -1,5 +1,5 @@
 export const ROUTER_PAGES = {
   HOME: '/',
-  LOGIN: '/login',
+  MOVIE_DETAIL: '/movie-detail',
   NOT_FOUND: '/*',
 };

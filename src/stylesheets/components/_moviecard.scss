@@ -10,6 +10,7 @@
     border-radius: $font-size-8;
     padding: $font-size-8;
     margin: $font-size-16;
+    box-shadow: 0px 0px 23px 3px rgba(0, 0, 0, 0.54);
   }
 
   @include mediaquery(medium) {

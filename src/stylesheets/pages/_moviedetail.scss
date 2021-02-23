@@ -1,0 +1,17 @@
+.moviedetail-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: flex-start;
+  align-items: flex-start;
+  div {
+    order: 0;
+    flex: 0 1 45%;
+    align-self: auto;
+    margin: $font-size-16;
+    @include mediaquery(medium) {
+      flex: 0 1 100%;
+    }
+  }
+}

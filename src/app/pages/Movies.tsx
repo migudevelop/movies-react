@@ -68,9 +68,7 @@ function Movies() {
                 genre?.toLowerCase().includes(movieFilters.genreFilter.toLowerCase()) &&
                 type?.toLowerCase().includes(movieFilters.typeFilter.toLowerCase())
             )
-            .map(({ imageURL, name, sortDescription, rating }: IEMovieProps, index: number) => (
-              <MovieCard key={index} imageURL={imageURL} name={name} description={sortDescription} rating={rating} />
-            ))}
+            .map((props: IEMovieProps, index: number) => <MovieCard key={index} {...props} />)}
       </div>
     </Layout>
   );

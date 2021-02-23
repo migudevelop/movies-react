@@ -1,4 +1,6 @@
 import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+import { ROUTER_PAGES } from 'components/Router/constants.js';
 import { CoreContext, CORE_CONSTANTS } from 'services/context/coreContext.js';
 import { BackdropContext } from 'services/context/backdropContext.js';
 import {
@@ -14,7 +16,7 @@ import {
   Menu,
   Hidden,
 } from '@material-ui/core';
-import { Search, AccountCircle } from '@material-ui/icons';
+import { Search, AccountCircle, Home } from '@material-ui/icons';
 import Dialog from 'components/commons/Dialog/Dialog';
 import { login } from 'services/axios_service/app';
 import { IELoginRequest } from 'interfaces/petitions';
@@ -25,6 +27,7 @@ const FILM_LIST = ['Blackwidow', 'Jumanji', 'Onward', 'Avengers', 'Spiderman', '
 function Header() {
   const { state, dispatch, searchText } = useContext(CoreContext);
   const { showLoader, hideLoader } = useContext(BackdropContext);
+  const history = useHistory();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [sendData, setSendData] = useState<IELoginRequest>({ user: '', password: '' });
   const [fieldErrors, setFieldsErrors] = useState<any>({});
@@ -35,11 +38,14 @@ function Header() {
       setOpenDialog(false);
       showLoader();
       login({ ...sendData })
-        .then(({ data }) => dispatch({ type: CORE_CONSTANTS.LOGIN, value: data.data.user }))
+        .then(({ data }) => dispatch({ type: CORE_CONSTANTS.LOGIN, value: data.user }))
         .catch((response) => {
           console.log(response);
         })
-        .finally(() => hideLoader());
+        .finally(() => {
+          setOpenDialog(false);
+          hideLoader();
+        });
     }
   };
 
@@ -50,6 +56,10 @@ function Header() {
 
   const handleMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
+  };
+
+  const goHome = () => {
+    history.push(ROUTER_PAGES.HOME);
   };
 
   const handleClose = () => {
@@ -98,6 +108,9 @@ function Header() {
       <div className="header-root">
         <AppBar position="static">
           <Toolbar className="container">
+            <IconButton edge="start" color="inherit" onClick={goHome}>
+              <Home />
+            </IconButton>
             {state.isLogged ? (
               <>
                 <IconButton edge="start" className="user-icon" color="inherit" onClick={handleMenu}>
