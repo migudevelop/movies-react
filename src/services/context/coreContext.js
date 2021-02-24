@@ -3,6 +3,7 @@ import React, { createContext } from 'react';
 export const CORE_CONSTANTS = {
   LOGIN: 'LOGIN',
   LOGOUT: 'LOGOUT',
+  USER: 'USER',
 };
 
 export const reducer = (state, action) => {
@@ -27,7 +28,7 @@ export const reducer = (state, action) => {
   }
 };
 
-export const initialState = {
+export const initialState = JSON.parse(localStorage.getItem(CORE_CONSTANTS.USER)) || {
   user: '',
   isLogged: false,
 };

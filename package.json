@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack-dev-server --config ./webpack/webpack.dev.js",
+    "start": "webpack-dev-server --config=./webpack/webpack.prod.js",
+    "start:dev": "cross-env NODE_ENV=development webpack-dev-server --config ./webpack/webpack.dev.js",
     "build": "cross-env NODE_ENV=production webpack --config ./webpack/webpack.prod.js",
     "mockServer": "node ./mocks/api/app.js",
     "test": "react-scripts test",

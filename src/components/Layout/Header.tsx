@@ -38,7 +38,10 @@ function Header() {
       setOpenDialog(false);
       showLoader();
       login({ ...sendData })
-        .then(({ data }) => dispatch({ type: CORE_CONSTANTS.LOGIN, value: data.user }))
+        .then(({ data }) => {
+          localStorage.setItem(CORE_CONSTANTS.USER, JSON.stringify(data));
+          dispatch({ type: CORE_CONSTANTS.LOGIN, value: data.user });
+        })
         .catch((response) => {
           console.log(response);
         })
@@ -50,6 +53,7 @@ function Header() {
   };
 
   const handleLogout = () => {
+    localStorage.removeItem(CORE_CONSTANTS.USER);
     dispatch({ type: CORE_CONSTANTS.LOGOUT });
     setAnchorEl(null);
   };

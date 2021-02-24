@@ -7,7 +7,6 @@ function MovieDetail() {
   const [state, setState] = useState<any>(null);
 
   useEffect(() => {
-    console.log(location);
     if (location.state != null) setState(location.state);
   }, [location]);
 
