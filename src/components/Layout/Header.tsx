@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ROUTER_PAGES } from 'components/Router/constants.js';
 import { CoreContext, CORE_CONSTANTS } from 'services/context/coreContext.js';
-import { BackdropContext } from 'services/context/backdropContext.js';
+import { CommonContext } from 'services/context/commonContext.js';
 import {
   AppBar,
   Toolbar,
@@ -26,7 +26,7 @@ const FILM_LIST = ['Blackwidow', 'Jumanji', 'Onward', 'Avengers', 'Spiderman', '
 
 function Header() {
   const { state, dispatch, searchText } = useContext(CoreContext);
-  const { showLoader, hideLoader } = useContext(BackdropContext);
+  const { showMessage, showLoader, hideLoader } = useContext(CommonContext);
   const history = useHistory();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [sendData, setSendData] = useState<IELoginRequest>({ user: '', password: '' });
@@ -42,8 +42,9 @@ function Header() {
           localStorage.setItem(CORE_CONSTANTS.USER, JSON.stringify(data));
           dispatch({ type: CORE_CONSTANTS.LOGIN, value: data.user });
         })
-        .catch((response) => {
-          console.log(response);
+        .catch(({ response }) => {
+          showMessage('alert', response.data.messageError);
+          console.log(response.data);
         })
         .finally(() => {
           setOpenDialog(false);
@@ -121,9 +122,7 @@ function Header() {
                   <AccountCircle />
                 </IconButton>
                 <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
-                  <Hidden mdUp>
-                    <MenuItem>{state.user}</MenuItem>
-                  </Hidden>
+                  <MenuItem>{state.user}</MenuItem>
                   <MenuItem onClick={handleLogout}>Logout</MenuItem>
                 </Menu>
                 <Typography className="title" variant="h6" noWrap>
@@ -139,6 +138,7 @@ function Header() {
                   btnCancelText="Cancel"
                   btnAcceptText="Login"
                   onAcceptClick={handleLogin}
+                  onOpenDialogChange={(value) => setOpenDialog(value)}
                 >
                   <DialogTitle id="form-dialog-title">Login</DialogTitle>
                   <DialogContent>

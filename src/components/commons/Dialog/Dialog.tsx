@@ -10,6 +10,7 @@ function LoginButtonDialog({
   btnCancelText,
   btnAcceptText,
   onAcceptClick,
+  onOpenDialogChange = () => null,
 }: IEDialogProps) {
   const [currentOpen, setOpen] = useState<boolean>(false);
 
@@ -19,9 +20,11 @@ function LoginButtonDialog({
 
   const handleClickOpen = () => {
     setOpen(true);
+    onOpenDialogChange(true);
   };
 
   const handleClose = () => {
+    onOpenDialogChange(false);
     setOpen(false);
   };
 

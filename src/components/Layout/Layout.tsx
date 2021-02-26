@@ -1,21 +1,18 @@
 import React, { useContext } from 'react';
 import { Props } from 'interfaces/commons';
-import { BackdropContext } from 'services/context/backdropContext';
+import { CommonContext } from 'services/context/commonContext';
 import Header from './Header';
-import { Backdrop, CircularProgress } from '@material-ui/core';
+import Loader from 'components/commons/Loader/Loader';
+import Message from 'components/commons/Message/Message';
 
 function Layout({ children }: Props) {
-  const { loading } = useContext(BackdropContext);
-  const backdropRef = React.createRef();
+  const { showMessageElement } = useContext(CommonContext);
   return (
     <>
       <Header />
+      <Loader />
       <div className="container">
-        {loading && (
-          <Backdrop ref={backdropRef} style={{ zIndex: 1 }} open={loading}>
-            <CircularProgress color="primary" size={70} />
-          </Backdrop>
-        )}
+        {showMessageElement && <Message />}
         {children}
       </div>
     </>

@@ -7,8 +7,9 @@
     "start:dev": "cross-env NODE_ENV=development webpack-dev-server --config ./webpack/webpack.dev.js",
     "build": "cross-env NODE_ENV=production webpack --config ./webpack/webpack.prod.js",
     "mockServer": "node ./mocks/api/app.js",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "testReact": "react-scripts test",
+    "eject": "react-scripts eject",
+    "test": "jest"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.3",

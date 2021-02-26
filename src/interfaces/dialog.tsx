@@ -8,4 +8,5 @@ export interface IEDialogProps {
   btnCancelText?: string;
   btnAcceptText?: string;
   onAcceptClick?(): any;
+  onOpenDialogChange?(openValue: boolean): any;
 }

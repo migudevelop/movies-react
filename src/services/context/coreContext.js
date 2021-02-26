@@ -9,7 +9,6 @@ export const CORE_CONSTANTS = {
 export const reducer = (state, action) => {
   switch (action.type) {
     case CORE_CONSTANTS.LOGIN: {
-      console.log(action);
       return {
         ...state,
         user: action.value,

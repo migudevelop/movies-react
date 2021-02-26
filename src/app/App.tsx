@@ -1,19 +1,18 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import Layout from 'components/Layout/Layout';
 import Routes from 'components/Router';
 import 'stylesheets/main.scss';
 import CoreContextProvider from 'services/providers/coreContextProvider';
-import BackdropContext from 'services/providers/backdropContextProvider';
+import CommonContext from 'services/providers/commonContextProvider';
 
 function App() {
   return (
     <CoreContextProvider>
-      <BackdropContext>
+      <CommonContext>
         <Router>
           <Routes />
         </Router>
-      </BackdropContext>
+      </CommonContext>
     </CoreContextProvider>
   );
 }

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { getMovies } from 'services/axios_service/movies';
 import Layout from 'components/Layout/Layout';
 import MovieCard from 'components/commons/MovieCard/MovieCard';
-import { BackdropContext } from 'services/context/backdropContext';
+import { CommonContext } from 'services/context/commonContext';
 import { CoreContext } from 'services/context/coreContext.js';
 import { FormControl, Select, InputLabel } from '@material-ui/core';
 
@@ -12,7 +12,7 @@ const TYPES = ['Superheros', 'childish', 'cartoons'];
 const GENRE = ['Action', 'Adventure', 'Comedy'];
 
 function Movies() {
-  const { showLoader, hideLoader } = useContext(BackdropContext);
+  const { showMessage, showLoader, hideLoader } = useContext(CommonContext);
   const { searchText } = useContext(CoreContext);
   const [movies, setMovies] = useState<[] | any>(null);
   const [movieFilters, setMovieFilters] = useState<IEMovieFilters>({ genreFilter: '', typeFilter: '' });
@@ -22,10 +22,14 @@ function Movies() {
       showLoader();
       getMovies()
         .then(({ data }) => {
-          hideLoader();
-          setMovies(data);
+          if (data.length > 0) {
+            setMovies(data);
+            return;
+          }
+          showMessage('info', 'No movie data found');
         })
-        .catch((err) => hideLoader());
+        .catch((err) => showMessage('alert'))
+        .finally(() => hideLoader());
     }
   }, []);
 
