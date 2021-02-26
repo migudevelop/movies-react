@@ -1,6 +1,11 @@
-# Getting Started with Create React App
+# Movies
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Project based on NodeJS, Express and MongoDB. Composed by frontend/backend with register and login users, and API with JWS token. Exists a complementary project wich consumes the API and it had built in Angular 7.
+
+To use
+To clone and run this repository you'll need Git and Node.js which comes with npm installed on your computer.
+
+You can run the server from terminal and view app opening http://localhost:9002 on your browser:
 
 ## Available Scripts
 
@@ -9,7 +14,7 @@ In the project directory, you can run:
 ### `yarn start`
 
 Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Open [http://localhost:9002](http://localhost:9002) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
