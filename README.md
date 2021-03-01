@@ -45,9 +45,11 @@ npm install or yarn install
 
 ### 2.3. <a name='Users'></a>Users 📋
 
-The users you can use to log into the web: (Example: user / password)
+The users you can use to log into the web:
 
-- user / aA123
+User | Password
+------------ | -------------
+user | aA123
 
 ## 3. <a name='Runningthetest'></a>Running the test ⚙️
 
@@ -68,7 +70,7 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 - [Sass](https://sass-lang.com/) - Css extension
 - [Express](https://expressjs.com/) - Web infrastructure with node js
 
-## 5. <a name='Structure'></a>Proyect structure 🛠️
+## 5. <a name='Structure'></a>Proyect structure 📦
 
 > 📦src\
 > ┣ 📂app\
