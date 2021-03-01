@@ -1,51 +1,111 @@
 # Movies
 
-Project based on NodeJS, Express and MongoDB. Composed by frontend/backend with register and login users, and API with JWS token. Exists a complementary project wich consumes the API and it had built in Angular 7.
+Responsive project based on NodeJS, Express and React which you show movies data and if you register you can valorate the movie.
 
-To use
-To clone and run this repository you'll need Git and Node.js which comes with npm installed on your computer.
+## 1. <a name='TableofContents'></a>Table of Contents
 
-You can run the server from terminal and view app opening http://localhost:9002 on your browser:
+- 1. [Table of Contents](#TableofContents)
+- 2. [Starting 🚀](#Starting)
+     - 2.1. [Pre-requisites 📋](#Pre-requisites)
+     - 2.2. [Instalation 🔧](#Instalation)
+     - 2.3. [Users 📋](#Users)
+- 3. [Running the test ⚙️](#Runningthetest)
+- 4. [Buildin with 🛠️](#Buildinwith)
+- 5. [Proyect Structure 📦](#Structure)
+- 6. [How to use the web 📖](#HowToUse)
 
-## Available Scripts
+## 2. <a name='Starting'></a>Starting 🚀
 
-In the project directory, you can run:
+You have available the next scripts to develop:
 
-### `yarn start`
+- start:dev: local server up to development (Previously you need runs the mocks server to show information).\
+  URL: [localhost:9002](http://localhost:9002/)
+- mockServer: local mock server up to development API.
 
-Runs the app in the development mode.\
-Open [http://localhost:9002](http://localhost:9002) to view it in the browser.
+Other script:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- start: local server up with Production config.\
+  URL: [localhost:8080](http://localhost:8080/)
+- build: generates the distribution of production.
 
-### `yarn test`
+### 2.1. <a name='Pre-requisites'></a>Pre-requisites 📋
+
+We must have installed in the system
+
+- Node 10.16.1
+- Yarn (Optional)
+
+### 2.2. <a name='Instalation'></a>Instalation 🔧
+
+Launch in the console:
+
+```
+npm install or yarn install
+```
+
+### 2.3. <a name='Users'></a>Users 📋
+
+The users you can use to log into the web: (Example: user / password)
+
+- user / aA123
+
+## 3. <a name='Runningthetest'></a>Running the test ⚙️
+
+```
+yarn test
+```
 
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+## 4. <a name='Buildinwith'></a>Buildin with 🛠️
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- [React](https://es.reactjs.org/) - JS Library for building UI
+- [React-router](https://reactrouter.com/) - Collection of navigational components
+- [Axios](https://github.com/axios/axios) - Promise based HTTP client for the browser and node.js
+- [MaterialUI](https://material-ui.com/) - React components for faster and easier web development.
+- [Bootstrap](https://getbootstrap.com/) - Front-end open source toolkit.
+- [Sass](https://sass-lang.com/) - Css extension
+- [Express](https://expressjs.com/) - Web infrastructure with node js
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 5. <a name='Structure'></a>Proyect structure 🛠️
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+> 📦src\
+> ┣ 📂app\
+> ┃ ┣ 📂pages\
+> ┃ ┗ 📜App.tsx\
+> ┣ 📂assets\
+> ┃ ┗ 📂images\
+> ┣ 📂components\
+> ┃ ┣ 📂commons\
+> ┃ ┣ 📂Layout\
+> ┃ ┗ 📂Router\
+> ┣ 📂interfaces\
+> ┣ 📂services\
+> ┃ ┣ 📂axios_service\
+> ┃ ┣ 📂context\
+> ┃ ┣ 📂hooks\
+> ┃ ┗ 📂providers\
+> ┣ 📂stylesheets\
+> ┃ ┣ 📂abstracts\
+> ┃ ┣ 📂components\
+> ┃ ┣ 📂layout\
+> ┃ ┣ 📂pages\
+> ┃ ┗ 📜main.scss\
+> ┣ 📂utils\
+> ┃ ┗ 📜endpoints.js\
+> ┗ 📜index.tsx
 
-### `yarn eject`
+## 6. <a name='HowToUse'></a>How to use the web 📖
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- ### Filter Movies:
+  On the main screen you can filter movies by genre or type. You can select the genre or type and the movies will be filtered at the moment.\
+  Also you can filter with name in the search input. You can see the gif for more information. \
+   <img src="readme_images/filter.gif" width="800"/>
+- ### Rate Movies:
+  You can rate movies; To do this, select the stars on the movie card. But only you can rate movies if you are logged. \
+   <img src="readme_images/rate.gif" width="800"/>
+- ### Detail Movies:
+  If you want to see the movie details, you can click the movie card to go to the movie details. \
+  If you want logout you clicked in the user icon and select logout.\
+   <img src="readme_images/detail.gif" width="800"/>
